@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "propietario")
+@Table(name = "cliente")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Propietario {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +25,12 @@ public class Propietario {
     @Column(nullable = false, unique = true, length = 20)
     private String documento;
 
-    @Column(length = 100)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(length = 20)
     private String telefono;
 
-    @OneToMany(mappedBy = "propietario")
-    private List<Vehiculo> vehiculos = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Venta> ventas = new ArrayList<>();
 }
