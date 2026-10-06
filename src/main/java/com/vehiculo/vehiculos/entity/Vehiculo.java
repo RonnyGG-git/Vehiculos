@@ -43,11 +43,6 @@ public class Vehiculo {
     @JoinColumn(name = "marca_id", nullable = false)
     private Marca marca;
 
-    // Opcional: un vehículo en inventario puede no tener propietario todavía.
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "propietario_id")
-    private Propietario propietario;
-
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mantenimiento> mantenimientos = new ArrayList<>();
 }
