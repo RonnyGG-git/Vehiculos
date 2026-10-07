@@ -12,6 +12,7 @@ import com.vehiculo.vehiculos.repository.VehiculoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,7 +41,8 @@ public class MantenimientoService {
         Mantenimiento m = new Mantenimiento();
         m.setVehiculo(vehiculo);
         m.setDescripcion(request.descripcion());
-        m.setCosto(request.costo());
+        // Misma escala que la columna DECIMAL(12,2): la respuesta coincide con lo que devuelve el GET.
+        m.setCosto(request.costo() != null ? request.costo().setScale(2, RoundingMode.HALF_UP) : null);
         m.setFecha(request.fecha() != null ? request.fecha() : LocalDate.now());
 
         vehiculo.setEstado(EstadoVehiculo.EN_MANTENIMIENTO);

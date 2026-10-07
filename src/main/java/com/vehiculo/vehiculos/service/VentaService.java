@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -58,7 +59,8 @@ public class VentaService {
         Venta venta = new Venta();
         venta.setCliente(cliente);
         venta.setVehiculo(vehiculo);
-        venta.setFechaVenta(LocalDateTime.now());
+        // MySQL DATETIME(6) guarda microsegundos; truncar evita que la respuesta difiera de lo persistido.
+        venta.setFechaVenta(LocalDateTime.now().truncatedTo(ChronoUnit.MICROS));
         venta.setPrecioBase(precioBase);
         venta.setDescuento(descuento);
         venta.setTotal(precioBase.subtract(descuento));

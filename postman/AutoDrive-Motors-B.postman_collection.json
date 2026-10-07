@@ -1,0 +1,720 @@
+{
+  "info": {
+    "name": "AutoDrive Motors - Persona B (Ventas y Mantenimientos)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Requisitos: app en {{baseUrl}} y datos de db/02-datos-prueba.sql cargados. Ejecutar en orden con el Collection Runner. Para repetir la corrida, volver a cargar db/02-datos-prueba.sql (las ventas cambian el estado de los vehiculos)."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Ventas",
+      "item": [
+        {
+          "name": "1. Venta con descuento 5% (120M)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"precioBase 120M\", () => pm.expect(j.precioBase).to.eql(120000000));",
+                  "pm.test(\"descuento 6M\", () => pm.expect(j.descuento).to.eql(6000000));",
+                  "pm.test(\"total 114M\", () => pm.expect(j.total).to.eql(114000000));",
+                  "pm.test(\"fecha generada\", () => pm.expect(j.fechaVenta).to.be.a(\"string\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Venta sin descuento (80M)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"sin descuento\", () => pm.expect(j.descuento).to.eql(0));",
+                  "pm.test(\"total = precio\", () => pm.expect(j.total).to.eql(80000000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Limite exacto 100M (sin descuento)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"100M no supera el umbral\", () => { pm.expect(j.descuento).to.eql(0); pm.expect(j.total).to.eql(100000000); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Vender vehiculo ya VENDIDO",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 409\", () => pm.response.to.have.status(409));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 409\", () => pm.expect(j.status).to.eql(409));",
+                  "pm.test(\"menciona VENDIDO\", () => pm.expect(pm.response.json().message).to.include(\"VENDIDO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Vender vehiculo EN_MANTENIMIENTO",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 409\", () => pm.response.to.have.status(409));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 409\", () => pm.expect(j.status).to.eql(409));",
+                  "pm.test(\"menciona EN_MANTENIMIENTO\", () => pm.expect(pm.response.json().message).to.include(\"EN_MANTENIMIENTO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Cliente inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 99,\n  \"vehiculoId\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 404\", () => pm.expect(j.status).to.eql(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Vehiculo inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 99\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 404\", () => pm.expect(j.status).to.eql(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Body sin ids (validacion)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 400\", () => pm.expect(j.status).to.eql(400));",
+                  "pm.test(\"details por campo\", () => pm.expect(pm.response.json().details.length).to.eql(2));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Listar ventas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"3 ventas\", () => pm.expect(pm.response.json().length).to.eql(3));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mantenimientos",
+      "item": [
+        {
+          "name": "10. Registrar mantenimiento (Aveo id 6)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 6,\n  \"descripcion\": \"Cambio de aceite\",\n  \"costo\": 150000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"fecha por defecto (hoy)\", () => pm.expect(j.fecha).to.be.a(\"string\"));",
+                  "pm.test(\"placa del vehiculo\", () => pm.expect(j.vehiculoPlaca).to.eql(\"TLR006\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Vender el Aveo ya EN_MANTENIMIENTO",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"vehiculoId\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 409\", () => pm.response.to.have.status(409));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 409\", () => pm.expect(j.status).to.eql(409));",
+                  "pm.test(\"estado cambio automatico\", () => pm.expect(pm.response.json().message).to.include(\"EN_MANTENIMIENTO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "12. Mantenimiento a vehiculo VENDIDO",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 3,\n  \"descripcion\": \"Revision\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 409\", () => pm.response.to.have.status(409));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 409\", () => pm.expect(j.status).to.eql(409));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "13. Mantenimiento con costo negativo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 6,\n  \"descripcion\": \"X\",\n  \"costo\": -5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 400\", () => pm.expect(j.status).to.eql(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14. Mantenimiento sin descripcion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 400\", () => pm.expect(j.status).to.eql(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "15. Historial del Aveo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/vehiculo/6",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                "vehiculo",
+                "6"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"1 mantenimiento\", () => pm.expect(pm.response.json().length).to.eql(1));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "16. Historial de vehiculo inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/vehiculo/99",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                "vehiculo",
+                "99"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "const j = pm.response.json();",
+                  "pm.test(\"Formato de error estandar\", () => { pm.expect(j).to.have.all.keys(\"timestamp\",\"status\",\"error\",\"message\",\"path\",\"details\"); });",
+                  "pm.test(\"status del body = 404\", () => pm.expect(j.status).to.eql(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "17. Listar mantenimientos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"lista no vacia\", () => pm.expect(pm.response.json().length).to.be.above(0));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
