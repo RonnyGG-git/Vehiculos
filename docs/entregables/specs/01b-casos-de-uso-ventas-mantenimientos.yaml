@@ -1,0 +1,34 @@
+type: casos-de-uso
+title: Diagrama de casos de uso — Ventas y Mantenimientos
+subtitle: API REST Concesionario de Vehículos · qué puede hacer cada actor
+theme: profesional
+page: CU Ventas y Mantenimientos
+system: API Concesionario
+layout: {cols: 3}
+
+actors:
+  - {id: asesor,  name: Asesor comercial, side: left}
+  - {id: admin,   name: Administrador, side: left}
+  - {id: taller,  name: Jefe de taller, side: right}
+
+usecases:
+  - {id: cu15, name: "CU-15 Registrar venta",         pos: [0, 1]}
+  - {id: cu19, name: "CU-19 Consultar ventas",        pos: [0, 3]}
+  - {id: cu21, name: "CU-21 Consultar mantenimientos", pos: [0, 4]}
+  - {id: cu16, name: "CU-16 Validar vehículo DISPONIBLE", pos: [1, 0]}
+  - {id: cu17, name: "CU-17 Calcular descuento y total", pos: [1, 1]}
+  - {id: cu18, name: "CU-18 Cambiar estado del vehículo", pos: [1, 2]}
+  - {id: cu22, name: "CU-22 Consultar historial de un vehículo", pos: [1, 4]}
+  - {id: cu20, name: "CU-20 Registrar mantenimiento", pos: [2, 2]}
+
+relations:
+  - {from: asesor, to: cu15}
+  - {from: admin, to: cu19}
+  - {from: admin, to: cu21}
+  - {from: taller, to: cu20}
+  - {from: taller, to: cu22}
+  - {from: cu15, to: cu16, type: include}
+  - {from: cu15, to: cu17, type: include}
+  - {from: cu15, to: cu18, type: include}
+  - {from: cu20, to: cu18, type: include}
+  - {from: cu22, to: cu21, type: extend, condition: filtrar por vehiculoId}

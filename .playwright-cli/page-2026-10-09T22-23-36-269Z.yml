@@ -1,0 +1,239 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e11]:
+      - strong [ref=e12]: Concesionario
+      - generic [ref=e13]: Gestión de vehículos
+    - navigation [ref=e14]:
+      - link "Dashboard" [ref=e15] [cursor=pointer]:
+        - /url: "#/dashboard"
+      - link "Clientes" [ref=e22] [cursor=pointer]:
+        - /url: "#/clientes"
+      - link "Marcas" [ref=e29] [cursor=pointer]:
+        - /url: "#/marcas"
+      - link "Vehículos" [ref=e33] [cursor=pointer]:
+        - /url: "#/vehiculos"
+      - link "Ventas" [ref=e40] [cursor=pointer]:
+        - /url: "#/ventas"
+      - link "Mantenimientos" [ref=e46] [cursor=pointer]:
+        - /url: "#/mantenimientos"
+    - generic [ref=e50]:
+      - generic [ref=e51]: API en línea
+      - generic [ref=e54]: Spring Boot · Puerto 8080
+  - generic [ref=e55]:
+    - banner [ref=e56]:
+      - heading "Vehículos" [level=1] [ref=e57]
+      - button "Actualizar" [ref=e59] [cursor=pointer]
+    - main [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Vehículos" [level=2] [ref=e66]
+          - paragraph [ref=e67]: Inventario con precios en COP y USD (tasa de cambio de la API externa).
+        - button "Nuevo vehículo" [ref=e68] [cursor=pointer]
+      - generic [ref=e71]:
+        - searchbox "Buscar por placa o modelo…" [ref=e73]
+        - combobox [ref=e74]:
+          - option "Todos los estados" [selected]
+          - option "Solo disponibles"
+        - combobox [ref=e75]:
+          - option "Todas las marcas" [selected]
+          - option "Marca123299"
+          - option "Marca135006"
+          - option "Marca853418"
+      - table [ref=e78]:
+        - rowgroup [ref=e79]:
+          - row [ref=e80]:
+            - columnheader "Placa" [ref=e81]
+            - columnheader "Marca" [ref=e82]
+            - columnheader "Modelo" [ref=e83]
+            - columnheader "Año" [ref=e84]
+            - columnheader "Color" [ref=e85]
+            - columnheader "Precio COP" [ref=e86]
+            - columnheader "Precio USD" [ref=e87]
+            - columnheader "Estado" [ref=e88]
+            - columnheader "Acciones" [ref=e89]
+        - rowgroup [ref=e90]:
+          - row [ref=e91]:
+            - cell "SZJ10A" [ref=e92]
+            - cell "Marca123299" [ref=e93]
+            - cell "Land Cruiser" [ref=e94]
+            - cell "2024" [ref=e95]
+            - cell "Blanco" [ref=e96]
+            - cell "$ 120.000.000" [ref=e97]
+            - cell "$37,078.03" [ref=e98]
+            - cell "Vendido" [ref=e99]
+            - cell [ref=e101]:
+              - button "Ver detalle" [ref=e102] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e106] [cursor=pointer]
+              - button "Editar" [ref=e111] [cursor=pointer]
+              - button "Eliminar" [ref=e115] [cursor=pointer]
+          - row [ref=e118]:
+            - cell "SZJ11B" [ref=e119]
+            - cell "Marca123299" [ref=e120]
+            - cell "Corolla" [ref=e121]
+            - cell "2024" [ref=e122]
+            - cell "Rojo" [ref=e123]
+            - cell "$ 80.000.000" [ref=e124]
+            - cell "$24,718.69" [ref=e125]
+            - cell "Vendido" [ref=e126]
+            - cell [ref=e128]:
+              - button "Ver detalle" [ref=e129] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e133] [cursor=pointer]
+              - button "Editar" [ref=e138] [cursor=pointer]
+              - button "Eliminar" [ref=e142] [cursor=pointer]
+          - row [ref=e145]:
+            - cell "SZJ12C" [ref=e146]
+            - cell "Marca123299" [ref=e147]
+            - cell "RAV4" [ref=e148]
+            - cell "2024" [ref=e149]
+            - cell "Blanco" [ref=e150]
+            - cell "$ 100.000.000" [ref=e151]
+            - cell "$30,898.36" [ref=e152]
+            - cell "Vendido" [ref=e153]
+            - cell [ref=e155]:
+              - button "Ver detalle" [ref=e156] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e160] [cursor=pointer]
+              - button "Editar" [ref=e165] [cursor=pointer]
+              - button "Eliminar" [ref=e169] [cursor=pointer]
+          - row [ref=e172]:
+            - cell "SZJ13D" [ref=e173]
+            - cell "Marca123299" [ref=e174]
+            - cell "Yaris" [ref=e175]
+            - cell "2024" [ref=e176]
+            - cell "Blanco" [ref=e177]
+            - cell "$ 60.000.000" [ref=e178]
+            - cell "$18,539.02" [ref=e179]
+            - cell "En mantenimiento" [ref=e180]
+            - cell [ref=e182]:
+              - button "Salir del taller (marcar disponible)" [ref=e183] [cursor=pointer]
+              - button "Ver detalle" [ref=e186] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e190] [cursor=pointer]
+              - button "Editar" [ref=e195] [cursor=pointer]
+              - button "Eliminar" [ref=e199] [cursor=pointer]
+          - row [ref=e202]:
+            - cell "VJO10A" [ref=e203]
+            - cell "Marca135006" [ref=e204]
+            - cell "Land Cruiser" [ref=e205]
+            - cell "2024" [ref=e206]
+            - cell "Blanco" [ref=e207]
+            - cell "$ 120.000.000" [ref=e208]
+            - cell "$37,078.03" [ref=e209]
+            - cell "Vendido" [ref=e210]
+            - cell [ref=e212]:
+              - button "Ver detalle" [ref=e213] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e217] [cursor=pointer]
+              - button "Editar" [ref=e222] [cursor=pointer]
+              - button "Eliminar" [ref=e226] [cursor=pointer]
+          - row [ref=e229]:
+            - cell "VJO11B" [ref=e230]
+            - cell "Marca135006" [ref=e231]
+            - cell "Corolla" [ref=e232]
+            - cell "2024" [ref=e233]
+            - cell "Rojo" [ref=e234]
+            - cell "$ 80.000.000" [ref=e235]
+            - cell "$24,718.69" [ref=e236]
+            - cell "Vendido" [ref=e237]
+            - cell [ref=e239]:
+              - button "Ver detalle" [ref=e240] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e244] [cursor=pointer]
+              - button "Editar" [ref=e249] [cursor=pointer]
+              - button "Eliminar" [ref=e253] [cursor=pointer]
+          - row [ref=e256]:
+            - cell "VJO12C" [ref=e257]
+            - cell "Marca135006" [ref=e258]
+            - cell "RAV4" [ref=e259]
+            - cell "2024" [ref=e260]
+            - cell "Blanco" [ref=e261]
+            - cell "$ 100.000.000" [ref=e262]
+            - cell "$30,898.36" [ref=e263]
+            - cell "Vendido" [ref=e264]
+            - cell [ref=e266]:
+              - button "Ver detalle" [ref=e267] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e271] [cursor=pointer]
+              - button "Editar" [ref=e276] [cursor=pointer]
+              - button "Eliminar" [ref=e280] [cursor=pointer]
+          - row [ref=e283]:
+            - cell "VJO13D" [ref=e284]
+            - cell "Marca135006" [ref=e285]
+            - cell "Yaris" [ref=e286]
+            - cell "2024" [ref=e287]
+            - cell "Blanco" [ref=e288]
+            - cell "$ 60.000.000" [ref=e289]
+            - cell "$18,539.02" [ref=e290]
+            - cell "En mantenimiento" [ref=e291]
+            - cell [ref=e293]:
+              - button "Salir del taller (marcar disponible)" [ref=e294] [cursor=pointer]
+              - button "Ver detalle" [ref=e297] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e301] [cursor=pointer]
+              - button "Editar" [ref=e306] [cursor=pointer]
+              - button "Eliminar" [ref=e310] [cursor=pointer]
+          - row [ref=e313]:
+            - cell "GIB10A" [ref=e314]
+            - cell "Marca853418" [ref=e315]
+            - cell "Land Cruiser" [ref=e316]
+            - cell "2024" [ref=e317]
+            - cell "Blanco" [ref=e318]
+            - cell "$ 120.000.000" [ref=e319]
+            - cell "$37,078.03" [ref=e320]
+            - cell "Vendido" [ref=e321]
+            - cell [ref=e323]:
+              - button "Ver detalle" [ref=e324] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e328] [cursor=pointer]
+              - button "Editar" [ref=e333] [cursor=pointer]
+              - button "Eliminar" [ref=e337] [cursor=pointer]
+          - row [ref=e340]:
+            - cell "GIB11B" [ref=e341]
+            - cell "Marca853418" [ref=e342]
+            - cell "Corolla" [ref=e343]
+            - cell "2024" [ref=e344]
+            - cell "Rojo" [ref=e345]
+            - cell "$ 80.000.000" [ref=e346]
+            - cell "$24,718.69" [ref=e347]
+            - cell "Vendido" [ref=e348]
+            - cell [ref=e350]:
+              - button "Ver detalle" [ref=e351] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e355] [cursor=pointer]
+              - button "Editar" [ref=e360] [cursor=pointer]
+              - button "Eliminar" [ref=e364] [cursor=pointer]
+          - row [ref=e367]:
+            - cell "GIB12C" [ref=e368]
+            - cell "Marca853418" [ref=e369]
+            - cell "RAV4" [ref=e370]
+            - cell "2024" [ref=e371]
+            - cell "Blanco" [ref=e372]
+            - cell "$ 100.000.000" [ref=e373]
+            - cell "$30,898.36" [ref=e374]
+            - cell "Vendido" [ref=e375]
+            - cell [ref=e377]:
+              - button "Ver detalle" [ref=e378] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e382] [cursor=pointer]
+              - button "Editar" [ref=e387] [cursor=pointer]
+              - button "Eliminar" [ref=e391] [cursor=pointer]
+          - row [ref=e394]:
+            - cell "GIB13D" [ref=e395]
+            - cell "Marca853418" [ref=e396]
+            - cell "Yaris" [ref=e397]
+            - cell "2024" [ref=e398]
+            - cell "Blanco" [ref=e399]
+            - cell "$ 60.000.000" [ref=e400]
+            - cell "$18,539.02" [ref=e401]
+            - cell "En mantenimiento" [ref=e402]
+            - cell [ref=e404]:
+              - button "Salir del taller (marcar disponible)" [ref=e405] [cursor=pointer]
+              - button "Ver detalle" [ref=e408] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e412] [cursor=pointer]
+              - button "Editar" [ref=e417] [cursor=pointer]
+              - button "Eliminar" [ref=e421] [cursor=pointer]
+          - row [ref=e424]:
+            - cell "CCC123" [ref=e425]
+            - cell "Marca135006" [ref=e426]
+            - cell "toyota" [ref=e427]
+            - cell "2020" [ref=e428]
+            - cell "rojito" [ref=e429]
+            - cell "$ 2.000.000" [ref=e430]
+            - cell "$617.97" [ref=e431]
+            - cell "Disponible" [ref=e432]
+            - cell [ref=e434]:
+              - button "Ver detalle" [ref=e435] [cursor=pointer]
+              - button "Historial de mantenimientos" [ref=e439] [cursor=pointer]
+              - button "Editar" [ref=e444] [cursor=pointer]
+              - button "Eliminar" [ref=e448] [cursor=pointer]

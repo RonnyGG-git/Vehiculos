@@ -1,0 +1,76 @@
+type: clases
+title: Diagrama de clases — Vehículos y consumo de API externa
+subtitle: VehiculoService usa TasaCambioService (caché + respaldo) y TasaCambioClient (RestClient)
+theme: profesional
+page: Clases - Vehículos y API externa
+layout: {cols: 3, gap_x: 110, gap_y: 90}
+
+classes:
+  - id: ctrl
+    name: VehiculoController
+    stereotype: RestController
+    color: primary
+    pos: [0, 0]
+    methods: ["+ listar(): List<VehiculoResponse>", "+ listarDisponibles(): List<VehiculoResponse>", "+ listarPorMarca(marca: String): List<VehiculoResponse>", "+ buscarPorId(id: Long): VehiculoResponse", "+ crear(r: VehiculoRequest): VehiculoResponse", "+ actualizar(id: Long, r: VehiculoRequest): VehiculoResponse", "+ eliminar(id: Long): void"]
+  - id: svc
+    name: VehiculoService
+    stereotype: Service
+    color: secondary
+    pos: [1, 0]
+    methods: ["+ listar(): List<VehiculoResponse>", "+ listarDisponibles(): List<VehiculoResponse>", "+ listarPorMarca(n: String): List<VehiculoResponse>", "+ crear(r: VehiculoRequest): VehiculoResponse", "+ actualizar(id: Long, r: VehiculoRequest): VehiculoResponse", "+ eliminar(id: Long): void", "+ obtenerEntidad(id: Long): Vehiculo", "+ cambiarEstado(id: Long, e: EstadoVehiculo): Vehiculo", "- aplicarDatos(v: Vehiculo, r: VehiculoRequest): void"]
+  - id: marcaSvc
+    name: MarcaService
+    stereotype: Service
+    color: secondary
+    pos: [2, 0]
+    methods: ["+ listar(): List<MarcaResponse>", "+ crear(r: MarcaRequest): MarcaResponse", "+ obtenerEntidad(id: Long): Marca"]
+  - id: req
+    name: VehiculoRequest
+    stereotype: record
+    color: tertiary
+    pos: [0, 1]
+    attrs: ["+ placa: String {@Pattern}", "+ marcaId: Long {@NotNull}", "+ modelo: String {@NotBlank}", "+ anio: Integer {@Min 1950, @Max 2100}", "+ color: String", "+ precio: BigDecimal {@PositiveOrZero}"]
+  - id: tasaSvc
+    name: TasaCambioService
+    stereotype: Service
+    color: secondary
+    pos: [1, 1]
+    attrs: ["- tasaRespaldo: BigDecimal", "- vigenciaCache: Duration", "- tasaEnCache: BigDecimal", "- obtenidaEn: Instant"]
+    methods: ["+ obtenerTasaCopPorUsd(): BigDecimal", "- tasaDeRespaldo(): BigDecimal"]
+  - id: vehRepo
+    name: VehiculoRepository
+    kind: interface
+    stereotype: Repository
+    color: accent
+    pos: [2, 1]
+    compact: true
+  - id: res
+    name: VehiculoResponse
+    stereotype: record
+    color: tertiary
+    pos: [0, 2]
+    attrs: ["+ id: Long", "+ placa: String", "+ marca: String", "+ modelo: String", "+ precioCop: BigDecimal", "+ precioUsd: BigDecimal", "+ tasaCambioCopPorUsd: BigDecimal", "+ estado: EstadoVehiculo"]
+    methods: ["+ from(v: Vehiculo, tasa: BigDecimal): VehiculoResponse {static}"]
+  - id: client
+    name: TasaCambioClient
+    stereotype: Component
+    color: secondary
+    pos: [1, 2]
+    attrs: ["- restClient: RestClient", "- url: String"]
+    methods: ["+ consultarCopPorUsd(): Optional<BigDecimal>"]
+  - id: ext
+    name: open.er-api.com
+    stereotype: API externa
+    color: neutral
+    pos: [2, 2]
+    compact: true
+
+relations:
+  - {from: ctrl, to: svc, type: association, nav: true}
+  - {from: ctrl, to: req, type: dependency, stereotype: use}
+  - {from: svc, to: marcaSvc, type: association, nav: true}
+  - {from: svc, to: tasaSvc, type: association, nav: true}
+  - {from: svc, to: vehRepo, type: association, nav: true}
+  - {from: svc, to: res, type: dependency, stereotype: create}
+  - {from: tasaSvc, to: client, type: association, nav: true}
+  - {from: client, to: ext, type: dependency, label: "GET /v6/latest/USD (JSON)"}

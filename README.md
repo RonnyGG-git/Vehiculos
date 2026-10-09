@@ -169,6 +169,7 @@ clave en las variables `DB_USER` y `DB_PASSWORD`).
 | POST | `/vehiculos` | 201 / 400 (precio negativo, placa inválida) / 404 marca inexistente / 409 placa repetida |
 | PUT | `/vehiculos/{id}` | 200 / 400 / 404 / 409 |
 | DELETE | `/vehiculos/{id}` | 204 / 404 / 409 si ya fue vendido |
+| POST | `/vehiculos/{id}/salir-taller` | 200, `EN_MANTENIMIENTO` → `DISPONIBLE` / 404 / 409 si no está en mantenimiento |
 
 Petición (el estado no se envía: todo vehículo nuevo queda `DISPONIBLE`):
 
@@ -268,12 +269,22 @@ Todas las respuestas de error usan `ErrorResponse`, generado por `GlobalExceptio
    (Marcas → Clientes → Vehículos). La colección genera placas, documentos y emails aleatorios,
    así que se puede ejecutar varias veces seguidas.
 
+**Colección final de entrega:** `postman/Concesionario_Final.postman_collection.json` — 44 peticiones de
+todos los módulos (marcas, clientes, vehículos, ventas, mantenimientos) con pruebas automáticas. Crea sus
+propios datos, así que no necesita `db/02-datos-prueba.sql` y se puede ejecutar varias veces seguidas.
+
 Pruebas unitarias: `mvnw.cmd test`.
 
 ## Documentación
 
+**Entregables consolidados:** [`docs/entregables/DOCUMENTACION.md`](docs/entregables/DOCUMENTACION.md) —
+requerimientos funcionales y no funcionales, historias de usuario, casos de uso, diagramas de clases y de
+secuencia, DER, modelo relacional, endpoints y lista de verificación de requisitos. Los diagramas están en
+`docs/entregables/*.drawio` (con imágenes en `docs/entregables/png/`) y el DDL en `db/00-esquema.sql`.
+
 | Archivo | Contenido |
 |---|---|
+| [`docs/entregables/DOCUMENTACION.md`](docs/entregables/DOCUMENTACION.md) | Documento de entregables completo |
 | [`docs/modelo-datos.md`](docs/modelo-datos.md) | DER, modelo relacional y formato de error |
 | `docs/Documentacion_PersonaA_Concesionario.drawio` | Casos de uso, especificación, requerimientos funcionales y no funcionales (se abre en [app.diagrams.net](https://app.diagrams.net)) |
 

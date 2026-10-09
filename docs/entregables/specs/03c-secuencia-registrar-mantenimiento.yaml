@@ -1,0 +1,35 @@
+type: secuencia
+title: Diagrama de secuencia — Registrar mantenimiento (POST /mantenimientos)
+subtitle: CU-20 · el vehículo pasa a EN_MANTENIMIENTO; no se permite si ya fue vendido
+theme: profesional
+page: Secuencia - Registrar mantenimiento
+name: RegistrarMantenimiento
+
+participants:
+  - {id: taller, name: Jefe de taller, kind: actor}
+  - {id: ctrl,   name: ":MantenimientoController", kind: boundary}
+  - {id: svc,    name: ":MantenimientoService", kind: control}
+  - {id: veh,    name: ":VehiculoRepository", kind: entity}
+  - {id: rep,    name: ":MantenimientoRepository", kind: entity}
+
+steps:
+  - {from: taller, to: ctrl, msg: "POST /mantenimientos {vehiculoId, descripcion, costo, fecha?}"}
+  - {from: ctrl, to: svc, msg: "registrar(request)"}
+  - {from: svc, to: veh, msg: "findByIdForUpdate(vehiculoId)"}
+  - {from: veh, to: svc, msg: "Optional<Vehiculo>", type: return}
+  - fragment: alt
+    operands:
+      - guard: vehículo inexistente
+        steps:
+          - {from: svc, to: taller, msg: "404 ErrorResponse (RecursoNoEncontradoException)", type: return}
+      - guard: "estado == VENDIDO"
+        steps:
+          - {from: svc, to: taller, msg: "409 ErrorResponse (VehiculoNoDisponibleException)", type: return}
+      - guard: else
+        steps:
+          - {from: svc, to: svc, msg: "fecha = request.fecha o LocalDate.now()"}
+          - {from: svc, to: svc, msg: "vehiculo.setEstado(EN_MANTENIMIENTO)"}
+          - {from: svc, to: rep, msg: "save(mantenimiento)"}
+          - {from: rep, to: svc, msg: "Mantenimiento", type: return}
+          - {from: svc, to: ctrl, msg: "MantenimientoResponse", type: return}
+          - {from: ctrl, to: taller, msg: "201 Created (JSON)", type: return}

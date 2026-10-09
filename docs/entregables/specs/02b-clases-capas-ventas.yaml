@@ -1,0 +1,110 @@
+type: clases
+title: Diagrama de clases — Arquitectura por capas (módulo Ventas)
+subtitle: Controller → Service → Repository, con DTOs y manejo de excepciones
+theme: profesional
+page: Clases - Capas Ventas
+layout: {cols: 4, gap_x: 110, gap_y: 90}
+
+classes:
+  - id: ctrl
+    name: VentaController
+    stereotype: RestController
+    color: primary
+    pos: [0, 0]
+    attrs: ["- ventaService: VentaService"]
+    methods: ["+ registrar(request: VentaRequest): VentaResponse", "+ listar(): List<VentaResponse>"]
+  - id: req
+    name: VentaRequest
+    stereotype: record
+    color: tertiary
+    pos: [0, 1]
+    attrs: ["+ clienteId: Long {@NotNull}", "+ vehiculoId: Long {@NotNull}"]
+  - id: res
+    name: VentaResponse
+    stereotype: record
+    color: tertiary
+    pos: [0, 2]
+    attrs: ["+ id: Long", "+ fechaVenta: LocalDateTime", "+ clienteId: Long", "+ clienteNombre: String", "+ vehiculoId: Long", "+ vehiculoPlaca: String", "+ precioBase: BigDecimal", "+ descuento: BigDecimal", "+ total: BigDecimal"]
+    methods: ["+ from(v: Venta): VentaResponse {static}"]
+  - id: svc
+    name: VentaService
+    stereotype: Service
+    color: secondary
+    pos: [1, 0]
+    attrs: ["~ UMBRAL_DESCUENTO: BigDecimal {static}", "~ PORCENTAJE_DESCUENTO: BigDecimal {static}"]
+    methods: ["+ registrar(request: VentaRequest): VentaResponse", "+ listar(): List<VentaResponse>", "~ calcularDescuento(precio: BigDecimal): BigDecimal {static}"]
+  - id: venta
+    name: Venta
+    stereotype: Entity
+    pos: [1, 1]
+    compact: true
+  - id: ventaRepo
+    name: VentaRepository
+    kind: interface
+    stereotype: Repository
+    color: accent
+    pos: [2, 0]
+    methods: ["+ save(v: Venta): Venta", "+ findAll(): List<Venta>"]
+  - id: cliRepo
+    name: ClienteRepository
+    kind: interface
+    stereotype: Repository
+    color: accent
+    pos: [2, 1]
+    methods: ["+ findById(id: Long): Optional<Cliente>", "+ findByEmail(email: String): Optional<Cliente>"]
+  - id: vehRepo
+    name: VehiculoRepository
+    kind: interface
+    stereotype: Repository
+    color: accent
+    pos: [2, 2]
+    methods: ["+ findByIdForUpdate(id: Long): Optional<Vehiculo>", "+ findByEstado(e: EstadoVehiculo): List<Vehiculo>", "+ findByMarcaNombreIgnoreCase(n: String): List<Vehiculo>", "+ findByPlaca(p: String): Optional<Vehiculo>"]
+  - id: jpa
+    name: "JpaRepository<T, ID>"
+    kind: interface
+    color: neutral
+    pos: [3, 1]
+    compact: true
+  - id: err
+    name: ErrorResponse
+    stereotype: record
+    color: tertiary
+    pos: [0, 3]
+    attrs: ["+ timestamp: LocalDateTime", "+ status: int", "+ error: String", "+ message: String", "+ path: String", "+ details: List<String>"]
+  - id: handler
+    name: GlobalExceptionHandler
+    stereotype: RestControllerAdvice
+    color: neutral
+    pos: [1, 3]
+    methods: ["+ handleNotFound(ex): ResponseEntity<ErrorResponse>", "+ handleBusiness(ex): ResponseEntity<ErrorResponse>", "+ handleValidation(ex): ResponseEntity<ErrorResponse>", "+ handleIntegrity(ex): ResponseEntity<ErrorResponse>", "+ handleGeneric(ex): ResponseEntity<ErrorResponse>"]
+  - id: biz
+    name: BusinessException
+    color: neutral
+    pos: [2, 3]
+    methods: ["+ BusinessException(message: String)"]
+  - id: nf
+    name: RecursoNoEncontradoException
+    color: neutral
+    pos: [1, 4]
+    methods: ["+ RecursoNoEncontradoException(recurso: String, id: Object)"]
+  - id: nodisp
+    name: VehiculoNoDisponibleException
+    color: neutral
+    pos: [2, 4]
+    methods: ["+ VehiculoNoDisponibleException(id: Long, estado: EstadoVehiculo)"]
+
+relations:
+  - {from: ctrl, to: svc, type: association, nav: true}
+  - {from: ctrl, to: req, type: dependency, stereotype: use}
+  - {from: svc, to: res, type: dependency, stereotype: create}
+  - {from: svc, to: ventaRepo, type: association, nav: true}
+  - {from: svc, to: cliRepo, type: association, nav: true}
+  - {from: svc, to: vehRepo, type: association, nav: true}
+  - {from: svc, to: venta, type: dependency, stereotype: create}
+  - {from: ventaRepo, to: jpa, type: generalization}
+  - {from: cliRepo, to: jpa, type: generalization}
+  - {from: vehRepo, to: jpa, type: generalization}
+  - {from: nodisp, to: biz, type: generalization}
+  - {from: handler, to: err, type: dependency, stereotype: create}
+  - {from: handler, to: biz, type: dependency, label: "409"}
+  - {from: handler, to: nf, type: dependency, label: "404"}

@@ -1,0 +1,47 @@
+type: clases
+title: Modelo relacional
+subtitle: Tablas, tipos (MySQL / H2), restricciones y claves foráneas generadas por JPA/Hibernate
+theme: profesional
+page: Modelo relacional
+layout: {cols: 3, gap_x: 150, gap_y: 100}
+
+classes:
+  - id: marca
+    name: marca
+    stereotype: table
+    color: accent
+    pos: [0, 0]
+    attrs: ["PK  id BIGINT AUTO_INCREMENT", "UK  nombre VARCHAR(60) NOT NULL", "     pais_origen VARCHAR(60)"]
+  - id: vehiculo
+    name: vehiculo
+    stereotype: table
+    color: accent
+    pos: [1, 0]
+    attrs: ["PK  id BIGINT AUTO_INCREMENT", "UK  placa VARCHAR(15) NOT NULL", "     modelo VARCHAR(60) NOT NULL", "     anio INT NOT NULL", "     color VARCHAR(30)", "     precio DECIMAL(12,2)", "     estado VARCHAR(20) NOT NULL", "FK  marca_id BIGINT NOT NULL"]
+  - id: mant
+    name: mantenimiento
+    stereotype: table
+    color: accent
+    pos: [2, 0]
+    attrs: ["PK  id BIGINT AUTO_INCREMENT", "     fecha DATE NOT NULL", "     descripcion VARCHAR(255) NOT NULL", "     costo DECIMAL(12,2)", "FK  vehiculo_id BIGINT NOT NULL"]
+  - id: cliente
+    name: cliente
+    stereotype: table
+    color: accent
+    pos: [0, 1]
+    attrs: ["PK  id BIGINT AUTO_INCREMENT", "     nombre VARCHAR(100) NOT NULL", "UK  documento VARCHAR(20) NOT NULL", "UK  email VARCHAR(100) NOT NULL", "     telefono VARCHAR(20)"]
+  - id: venta
+    name: venta
+    stereotype: table
+    color: accent
+    pos: [1, 1]
+    attrs: ["PK  id BIGINT AUTO_INCREMENT", "     fecha_venta DATETIME(6) NOT NULL", "     precio_base DECIMAL(14,2) NOT NULL", "     descuento DECIMAL(14,2) NOT NULL", "     total DECIMAL(14,2) NOT NULL", "FK  cliente_id BIGINT NOT NULL", "FK  vehiculo_id BIGINT NOT NULL"]
+
+relations:
+  - {from: vehiculo, to: marca, type: dependency, label: "marca_id → marca.id"}
+  - {from: mant, to: vehiculo, type: dependency, label: "vehiculo_id → vehiculo.id"}
+  - {from: venta, to: cliente, type: dependency, label: "cliente_id → cliente.id"}
+  - {from: venta, to: vehiculo, type: dependency, label: "vehiculo_id → vehiculo.id"}
+
+notes:
+  - {text: "estado ∈ {DISPONIBLE, VENDIDO,\nEN_MANTENIMIENTO} (@Enumerated STRING)\n\nForma normal: 3FN.\nprecio_base guarda el precio al momento\nde la venta (histórico).", pos: [2, 1]}

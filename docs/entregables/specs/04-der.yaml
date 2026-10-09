@@ -1,0 +1,37 @@
+type: clases
+title: DER — Diagrama Entidad-Relación
+subtitle: Base de datos concesionario · notación pata de gallo (crow's foot)
+theme: profesional
+page: DER
+layout: {cols: 3, gap_x: 170, gap_y: 110}
+
+classes:
+  - id: marca
+    name: MARCA
+    pos: [0, 0]
+    attrs: ["PK  id", "UK  nombre", "     pais_origen"]
+  - id: vehiculo
+    name: VEHICULO
+    pos: [1, 0]
+    attrs: ["PK  id", "UK  placa", "     modelo", "     anio", "     color", "     precio", "     estado", "FK  marca_id"]
+  - id: mant
+    name: MANTENIMIENTO
+    pos: [2, 0]
+    attrs: ["PK  id", "     fecha", "     descripcion", "     costo", "FK  vehiculo_id"]
+  - id: cliente
+    name: CLIENTE
+    pos: [0, 1]
+    attrs: ["PK  id", "     nombre", "UK  documento", "UK  email", "     telefono"]
+  - id: venta
+    name: VENTA
+    pos: [1, 1]
+    attrs: ["PK  id", "     fecha_venta", "     precio_base", "     descuento", "     total", "FK  cliente_id", "FK  vehiculo_id"]
+
+relations:
+  - {from: marca, to: vehiculo, type: association, label: tiene, mult: ["1", "0..N"]}
+  - {from: vehiculo, to: mant, type: association, label: recibe, mult: ["1", "0..N"]}
+  - {from: cliente, to: venta, type: association, label: realiza, mult: ["1", "0..N"]}
+  - {from: vehiculo, to: venta, type: association, label: se vende en, mult: ["1", "0..1"]}
+
+notes:
+  - {text: "Cardinalidades:\n‖ = exactamente uno\nO< = cero o muchos\nO| = cero o uno", pos: [2, 1]}

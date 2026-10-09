@@ -1,0 +1,44 @@
+type: secuencia
+title: Diagrama de secuencia — Consultar vehículos disponibles (GET /vehiculos/disponibles)
+subtitle: CU-09 + CU-13 · consumo de la API externa de tasa de cambio con caché y valor de respaldo
+theme: profesional
+page: Secuencia - Vehículos y API externa
+name: ConsultarDisponibles
+
+participants:
+  - {id: asesor, name: Asesor comercial, kind: actor}
+  - {id: ctrl,   name: ":VehiculoController", kind: boundary}
+  - {id: svc,    name: ":VehiculoService", kind: control}
+  - {id: repo,   name: ":VehiculoRepository", kind: entity}
+  - {id: tasa,   name: ":TasaCambioService", kind: control}
+  - {id: client, name: ":TasaCambioClient"}
+  - {id: api,    name: "open.er-api.com", stereotype: API externa}
+
+steps:
+  - {from: asesor, to: ctrl, msg: "GET /vehiculos/disponibles"}
+  - {from: ctrl, to: svc, msg: "listarDisponibles()"}
+  - {from: svc, to: repo, msg: "findByEstado(DISPONIBLE)"}
+  - {from: repo, to: svc, msg: "List<Vehiculo>", type: return}
+  - {from: svc, to: tasa, msg: "obtenerTasaCopPorUsd()"}
+  - fragment: alt
+    operands:
+      - guard: tasa en caché vigente (menos de 60 min)
+        steps:
+          - {from: tasa, to: tasa, msg: "usar tasaEnCache"}
+      - guard: else
+        steps:
+          - {from: tasa, to: client, msg: "consultarCopPorUsd()"}
+          - {from: client, to: api, msg: "GET /v6/latest/USD (timeout 5 s)"}
+          - {from: api, to: client, msg: "JSON {rates: {COP: ...}}", type: return}
+          - {from: client, to: tasa, msg: "Optional<BigDecimal>", type: return}
+          - fragment: opt
+            guard: API falló o sin COP
+            steps:
+              - {from: tasa, to: tasa, msg: "última tasa conocida o respaldo (4000)"}
+  - {from: tasa, to: svc, msg: "tasa COP/USD", type: return}
+  - fragment: loop
+    guard: por cada vehículo
+    steps:
+      - {from: svc, to: svc, msg: "VehiculoResponse.from(v, tasa): precioUsd = precioCop / tasa"}
+  - {from: svc, to: ctrl, msg: "List<VehiculoResponse>", type: return}
+  - {from: ctrl, to: asesor, msg: "200 OK (JSON con precioCop y precioUsd)", type: return}

@@ -55,4 +55,10 @@ public class VehiculoController {
     public void eliminar(@PathVariable Long id) {
         vehiculoService.eliminar(id);
     }
+
+    /** Salida de taller: EN_MANTENIMIENTO → DISPONIBLE. */
+    @PostMapping("/{id}/salir-taller")
+    public VehiculoResponse salirTaller(@PathVariable Long id) {
+        return vehiculoService.salirTaller(id);
+    }
 }

@@ -1,0 +1,207 @@
+<mxfile host="drawio-uml" agent="drawio-uml skill" version="24.0.0">
+  <diagram id="pagina-1" name="CU Clientes y Vehículos">
+    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1370" pageHeight="820" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_title" value="Diagrama de casos de uso — Clientes y Vehículos" style="text;html=1;whiteSpace=nowrap;align=left;verticalAlign=top;fontStyle=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="26" y="30" width="446.49" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="_subtitle" value="API REST Concesionario de Vehículos · qué puede hacer cada actor" style="text;html=1;whiteSpace=nowrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#6B7280;" vertex="1" parent="1">
+          <mxGeometry x="26" y="58" width="376.18" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="sistema" value="API Concesionario" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fontStyle=1;spacingTop=10;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.3;fontFamily=Helvetica;fontSize=14;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="174" y="88" width="804.75" height="696" as="geometry" />
+        </mxCell>
+        <mxCell id="cu01" value="CU-01 Registrar cliente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="50.68" y="52" width="184.5" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu03" value="CU-03 Actualizar cliente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="77.97" y="144" width="189.92" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu02" value="CU-02 Consultar clientes" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="44.82" y="236" width="196.23" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu09" value="CU-09 Consultar vehículos&lt;br&gt;disponibles" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="38.51" y="420" width="208.84" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu10" value="CU-10 Buscar vehículos por&lt;br&gt;marca" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="54" y="512" width="217.86" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu06" value="CU-06 Consultar vehículos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="38.51" y="604" width="208.84" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu11" value="CU-11 Validar email y&lt;br&gt;documento únicos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="323.19" y="52" width="173.69" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu12" value="CU-12 Validar placa única" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="307.86" y="236" width="204.35" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu13" value="CU-13 Convertir precio&lt;br&gt;COP a USD" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="319.14" y="512" width="181.79" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu04" value="CU-04 Eliminar cliente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="580.84" y="52" width="177.29" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu05" value="CU-05 Registrar vehículo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="500.92" y="144" width="197.12" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu07" value="CU-07 Actualizar vehículo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="568.21" y="236" width="202.54" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu08" value="CU-08 Eliminar vehículo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="504.53" y="328" width="189.9" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu14" value="CU-14 Gestionar marcas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="571.82" y="420" width="195.32" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="asesor" value="Asesor comercial" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;whiteSpace=nowrap;fillColor=#FFFFFF;strokeColor=#1F2937;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="30" y="415" width="34" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" value="Administrador" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;whiteSpace=nowrap;fillColor=#FFFFFF;strokeColor=#1F2937;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1088.75" y="323" width="34" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="«actor»&lt;br&gt;&lt;b&gt;API tasa de cambio (open.er-api.com)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1088.75" y="603" width="248.25" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="_c1" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu01">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c2" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu02">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c3" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c4" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu09">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c5" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c6" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu06">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c7" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu04">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c8" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu05">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c9" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu07">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c10" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c11" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c12" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu01" target="cu11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c13" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu03" target="cu11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c14" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu05" target="cu12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c15" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu07" target="cu12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c16" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu06" target="cu13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c17" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu09" target="cu13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c18" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu10" target="cu13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c19" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="api" target="cu13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pagina-2" name="CU Ventas y Mantenimientos">
+    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1080" pageHeight="630" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_title" value="Diagrama de casos de uso — Ventas y Mantenimientos" style="text;html=1;whiteSpace=nowrap;align=left;verticalAlign=top;fontStyle=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="26" y="30" width="489.72" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="_subtitle" value="API REST Concesionario de Vehículos · qué puede hacer cada actor" style="text;html=1;whiteSpace=nowrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#6B7280;" vertex="1" parent="1">
+          <mxGeometry x="26" y="58" width="376.18" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="sistema" value="API Concesionario" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fontStyle=1;spacingTop=10;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.3;fontFamily=Helvetica;fontSize=14;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="174" y="88" width="726.98" height="512" as="geometry" />
+        </mxCell>
+        <mxCell id="cu15" value="CU-15 Registrar venta" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="39.86" y="144" width="177.3" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu19" value="CU-19 Consultar ventas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="34" y="328" width="189.03" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu21" value="CU-21 Consultar&lt;br&gt;mantenimientos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="53.51" y="420" width="150" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu16" value="CU-16 Validar vehículo&lt;br&gt;DISPONIBLE" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="292.1" y="52" width="181.81" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu17" value="CU-17 Calcular descuento&lt;br&gt;y total" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="279.93" y="144" width="206.15" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu18" value="CU-18 Cambiar estado del&lt;br&gt;vehículo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="279.03" y="236" width="207.95" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu22" value="CU-22 Consultar historial&lt;br&gt;de un vehículo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="284.44" y="420" width="197.12" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cu20" value="CU-20 Registrar&lt;br&gt;mantenimiento" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B6FB6;strokeWidth=1.3;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="sistema">
+          <mxGeometry x="542.98" y="236" width="150" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="asesor" value="Asesor comercial" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;whiteSpace=nowrap;fillColor=#FFFFFF;strokeColor=#1F2937;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="30" y="231" width="34" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" value="Administrador" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;whiteSpace=nowrap;fillColor=#FFFFFF;strokeColor=#1F2937;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="30" y="461" width="34" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="taller" value="Jefe de taller" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;whiteSpace=nowrap;fillColor=#FFFFFF;strokeColor=#1F2937;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1010.98" y="415" width="34" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="_c1" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="asesor" target="cu15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c2" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c3" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="admin" target="cu21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c4" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="taller" target="cu20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c5" value="" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=none;" edge="1" parent="1" source="taller" target="cu22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c6" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu15" target="cu16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c7" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu15" target="cu17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c8" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu15" target="cu18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c9" value="«include»" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu20" target="cu18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_c10" value="«extend»&lt;br&gt;[filtrar por vehiculoId]" style="html=1;rounded=0;strokeColor=#374151;strokeWidth=1.2;labelBackgroundColor=#FFFFFF;endSize=10;startSize=10;fontFamily=Helvetica;fontSize=11;fontColor=#1F2937;endArrow=open;endFill=0;endSize=12;dashed=1;dashPattern=8 4;" edge="1" parent="sistema" source="cu22" target="cu21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

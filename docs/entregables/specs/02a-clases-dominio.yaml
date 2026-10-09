@@ -1,0 +1,49 @@
+type: clases
+title: Diagrama de clases — Modelo de dominio (entidades JPA)
+subtitle: Paquete com.vehiculo.vehiculos.entity
+theme: profesional
+page: Clases - Dominio
+layout: {cols: 3, gap_x: 140, gap_y: 100}
+
+classes:
+  - id: marca
+    name: Marca
+    stereotype: Entity
+    pos: [0, 0]
+    attrs: ["- id: Long", "- nombre: String {unique}", "- paisOrigen: String", "- vehiculos: List<Vehiculo>"]
+  - id: vehiculo
+    name: Vehiculo
+    stereotype: Entity
+    pos: [1, 0]
+    attrs: ["- id: Long", "- placa: String {unique}", "- modelo: String", "- anio: Integer", "- color: String", "- precio: BigDecimal", "- estado: EstadoVehiculo", "- marca: Marca", "- mantenimientos: List<Mantenimiento>"]
+  - id: estado
+    kind: enum
+    name: EstadoVehiculo
+    pos: [2, 0]
+    literals: [DISPONIBLE, VENDIDO, EN_MANTENIMIENTO]
+  - id: cliente
+    name: Cliente
+    stereotype: Entity
+    pos: [0, 1]
+    attrs: ["- id: Long", "- nombre: String", "- documento: String {unique}", "- email: String {unique}", "- telefono: String", "- ventas: List<Venta>"]
+  - id: venta
+    name: Venta
+    stereotype: Entity
+    pos: [1, 1]
+    attrs: ["- id: Long", "- fechaVenta: LocalDateTime", "- precioBase: BigDecimal", "- descuento: BigDecimal", "- total: BigDecimal", "- cliente: Cliente", "- vehiculo: Vehiculo"]
+  - id: mant
+    name: Mantenimiento
+    stereotype: Entity
+    pos: [2, 1]
+    attrs: ["- id: Long", "- fecha: LocalDate", "- descripcion: String", "- costo: BigDecimal", "- vehiculo: Vehiculo"]
+
+relations:
+  - {from: marca, to: vehiculo, type: association, label: tiene, mult: ["1", "0..*"]}
+  - {from: vehiculo, to: estado, type: dependency, stereotype: use}
+  - {from: cliente, to: venta, type: association, label: realiza, mult: ["1", "0..*"]}
+  - {from: vehiculo, to: venta, type: association, label: se vende en, mult: ["1", "0..1"]}
+  - {from: vehiculo, to: mant, type: composition, label: recibe, mult: ["1", "0..*"]}
+
+notes:
+  - {text: "Un vehículo se vende una sola vez:\nlo garantiza la regla de negocio\n(estado VENDIDO + bloqueo pesimista).", attach: venta, side: bottom}
+  - {text: "Composición: cascade = ALL,\norphanRemoval = true", attach: mant, side: bottom}

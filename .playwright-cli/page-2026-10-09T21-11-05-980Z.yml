@@ -1,0 +1,158 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e11]:
+      - strong [ref=e12]: Concesionario
+      - generic [ref=e13]: Gestión de vehículos
+    - navigation [ref=e14]:
+      - link "Dashboard" [ref=e15] [cursor=pointer]:
+        - /url: "#/dashboard"
+      - link "Clientes" [ref=e22] [cursor=pointer]:
+        - /url: "#/clientes"
+      - link "Marcas" [ref=e29] [cursor=pointer]:
+        - /url: "#/marcas"
+      - link "Vehículos" [ref=e33] [cursor=pointer]:
+        - /url: "#/vehiculos"
+      - link "Ventas" [ref=e40] [cursor=pointer]:
+        - /url: "#/ventas"
+      - link "Mantenimientos" [ref=e46] [cursor=pointer]:
+        - /url: "#/mantenimientos"
+    - generic [ref=e50]:
+      - generic [ref=e51]: API en línea
+      - generic [ref=e54]: Spring Boot · Puerto 8080
+  - generic [ref=e55]:
+    - banner [ref=e56]:
+      - heading "Dashboard" [level=1] [ref=e57]
+      - button "Actualizar" [ref=e59] [cursor=pointer]
+    - main [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Panel general" [level=2] [ref=e66]
+          - paragraph [ref=e67]: Resumen del concesionario en tiempo real.
+        - generic [ref=e68]: 1 USD = 3.236,42 COP
+      - generic [ref=e69]:
+        - generic [ref=e77]:
+          - generic [ref=e78]: Clientes
+          - generic [ref=e79]: "5"
+          - generic [ref=e80]: registrados
+        - generic [ref=e88]:
+          - generic [ref=e89]: Vehículos
+          - generic [ref=e90]: "12"
+          - generic [ref=e91]: 0 disponibles
+        - generic [ref=e98]:
+          - generic [ref=e99]: Ventas
+          - generic [ref=e100]: "9"
+          - generic [ref=e101]: $ 882.000.000 facturado
+        - generic [ref=e106]:
+          - generic [ref=e107]: Mantenimientos
+          - generic [ref=e108]: "3"
+          - generic [ref=e109]: $ 450.000 en costos
+        - generic [ref=e114]:
+          - generic [ref=e115]: Marcas
+          - generic [ref=e116]: "3"
+          - generic [ref=e117]: en catálogo
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - heading "Últimas ventas" [level=2] [ref=e122]
+              - paragraph [ref=e123]: 9 venta(s) en total
+            - button "Ver todas" [ref=e124] [cursor=pointer]
+          - table [ref=e126]:
+            - rowgroup [ref=e127]:
+              - row [ref=e128]:
+                - columnheader "Fecha" [ref=e129]
+                - columnheader "Cliente" [ref=e130]
+                - columnheader "Vehículo" [ref=e131]
+                - columnheader "Total" [ref=e132]
+            - rowgroup [ref=e133]:
+              - row [ref=e134]:
+                - cell "2026-10-08 13:57" [ref=e135]
+                - cell "Carlos Pérez Gómez" [ref=e136]
+                - cell "GIB12C" [ref=e137]
+                - cell [ref=e138]:
+                  - strong [ref=e139]: $ 100.000.000
+              - row [ref=e140]:
+                - cell "2026-10-08 13:57" [ref=e141]
+                - cell "Carlos Pérez Gómez" [ref=e142]
+                - cell "GIB11B" [ref=e143]
+                - cell [ref=e144]:
+                  - strong [ref=e145]: $ 80.000.000
+              - row [ref=e146]:
+                - cell "2026-10-08 13:57" [ref=e147]
+                - cell "Carlos Pérez Gómez" [ref=e148]
+                - cell "GIB10A" [ref=e149]
+                - cell [ref=e150]:
+                  - strong [ref=e151]: $ 114.000.000
+              - row [ref=e152]:
+                - cell "2026-10-08 13:12" [ref=e153]
+                - cell "Carlos Pérez Gómez" [ref=e154]
+                - cell "VJO12C" [ref=e155]
+                - cell [ref=e156]:
+                  - strong [ref=e157]: $ 100.000.000
+              - row [ref=e158]:
+                - cell "2026-10-08 13:12" [ref=e159]
+                - cell "Carlos Pérez Gómez" [ref=e160]
+                - cell "VJO11B" [ref=e161]
+                - cell [ref=e162]:
+                  - strong [ref=e163]: $ 80.000.000
+              - row [ref=e164]:
+                - cell "2026-10-08 13:12" [ref=e165]
+                - cell "Carlos Pérez Gómez" [ref=e166]
+                - cell "VJO10A" [ref=e167]
+                - cell [ref=e168]:
+                  - strong [ref=e169]: $ 114.000.000
+        - generic [ref=e170]:
+          - generic [ref=e171]:
+            - generic [ref=e172]:
+              - heading "Últimos mantenimientos" [level=2] [ref=e173]
+              - paragraph [ref=e174]: 3 registro(s)
+            - button "Ver todos" [ref=e175] [cursor=pointer]
+          - table [ref=e177]:
+            - rowgroup [ref=e178]:
+              - row [ref=e179]:
+                - columnheader "Fecha" [ref=e180]
+                - columnheader "Vehículo" [ref=e181]
+                - columnheader "Descripción" [ref=e182]
+                - columnheader "Costo" [ref=e183]
+            - rowgroup [ref=e184]:
+              - row [ref=e185]:
+                - cell "2026-10-08" [ref=e186]
+                - cell "GIB13D" [ref=e187]
+                - cell "Cambio de aceite" [ref=e188]
+                - cell "$ 150.000" [ref=e189]
+              - row [ref=e190]:
+                - cell "2026-10-08" [ref=e191]
+                - cell "VJO13D" [ref=e192]
+                - cell "Cambio de aceite" [ref=e193]
+                - cell "$ 150.000" [ref=e194]
+              - row [ref=e195]:
+                - cell "2026-10-08" [ref=e196]
+                - cell "SZJ13D" [ref=e197]
+                - cell "Cambio de aceite" [ref=e198]
+                - cell "$ 150.000" [ref=e199]
+        - generic [ref=e200]:
+          - generic [ref=e201]:
+            - generic [ref=e202]:
+              - heading "Estado del inventario" [level=2] [ref=e203]
+              - paragraph [ref=e204]: Distribución por estado
+            - button "Ir a vehículos" [ref=e205] [cursor=pointer]
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - generic [ref=e208]: Disponible
+              - strong [ref=e211]: "0"
+            - generic [ref=e212]:
+              - generic [ref=e213]: Vendido
+              - strong [ref=e217]: "9"
+            - generic [ref=e218]:
+              - generic [ref=e219]: En mantenimiento
+              - strong [ref=e223]: "3"
+        - generic [ref=e224]:
+          - generic [ref=e226]:
+            - heading "Accesos rápidos" [level=2] [ref=e227]
+            - paragraph [ref=e228]: Atajos a las operaciones más frecuentes
+          - generic [ref=e229]:
+            - button "Nueva venta" [ref=e230] [cursor=pointer]
+            - button "Vehículos" [ref=e236] [cursor=pointer]
+            - button "Clientes" [ref=e243] [cursor=pointer]
+            - button "Mantenimientos" [ref=e250] [cursor=pointer]
+      - paragraph [ref=e254]: "Precios convertidos con la API externa de tasa de cambio (respaldo: $1.00 ≈ $ 4.000). Tasa actual: 1 USD = $ 3.236,42."

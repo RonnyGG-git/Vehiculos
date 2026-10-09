@@ -1,0 +1,38 @@
+- generic [ref=f1e2]:
+  - complementary [ref=f1e3]:
+    - generic [ref=f1e11]:
+      - strong [ref=f1e12]: Concesionario
+      - generic [ref=f1e13]: Gestión de vehículos
+    - navigation [ref=f1e14]:
+      - link "Dashboard" [ref=f1e15] [cursor=pointer]:
+        - /url: "#/dashboard"
+      - link "Clientes" [ref=f1e22] [cursor=pointer]:
+        - /url: "#/clientes"
+      - link "Marcas" [ref=f1e29] [cursor=pointer]:
+        - /url: "#/marcas"
+      - link "Vehículos" [ref=f1e33] [cursor=pointer]:
+        - /url: "#/vehiculos"
+      - link "Ventas" [ref=f1e40] [cursor=pointer]:
+        - /url: "#/ventas"
+      - link "Mantenimientos" [ref=f1e46] [cursor=pointer]:
+        - /url: "#/mantenimientos"
+    - generic [ref=f1e50]:
+      - generic [ref=f1e51]: API en línea
+      - generic [ref=f1e54]: Spring Boot · Puerto 8080
+  - generic [ref=f1e55]:
+    - banner [ref=f1e56]:
+      - heading "Vehículos" [level=1] [ref=f1e88]
+      - button "Actualizar" [ref=f1e59] [cursor=pointer]
+    - main [ref=f1e63]:
+      - generic [ref=f1e89]:
+        - generic [ref=f1e90]:
+          - heading "Vehículos" [level=2] [ref=f1e91]
+          - paragraph [ref=f1e92]: Inventario con precios en COP y USD (tasa de cambio de la API externa).
+        - button "Nuevo vehículo" [disabled] [ref=f1e93]
+      - generic [ref=f1e96]:
+        - searchbox "Buscar por placa o modelo…" [ref=f1e98]
+        - combobox [ref=f1e99]:
+          - option "Todos los estados" [selected]
+          - option "Solo disponibles"
+        - combobox [ref=f1e100]:
+          - option "Todas las marcas" [selected]

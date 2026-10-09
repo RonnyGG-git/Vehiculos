@@ -66,6 +66,21 @@ public class VehiculoService {
         return vehiculoRepository.save(vehiculo);
     }
 
+    /**
+     * Salida de taller: solo un vehículo EN_MANTENIMIENTO vuelve a DISPONIBLE.
+     * Un vehículo VENDIDO nunca regresa a disponible.
+     */
+    @Transactional
+    public VehiculoResponse salirTaller(Long id) {
+        Vehiculo vehiculo = obtenerEntidad(id);
+        if (vehiculo.getEstado() != EstadoVehiculo.EN_MANTENIMIENTO) {
+            throw new BusinessException("El vehículo " + id + " no está en mantenimiento (estado actual: "
+                    + vehiculo.getEstado() + ")");
+        }
+        vehiculo.setEstado(EstadoVehiculo.DISPONIBLE);
+        return VehiculoResponse.from(vehiculoRepository.save(vehiculo), tasaCambioService.obtenerTasaCopPorUsd());
+    }
+
     @Transactional
     public VehiculoResponse crear(VehiculoRequest request) {
         Vehiculo vehiculo = new Vehiculo();

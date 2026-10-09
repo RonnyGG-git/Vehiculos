@@ -1,0 +1,50 @@
+type: casos-de-uso
+title: Diagrama de casos de uso — Clientes y Vehículos
+subtitle: API REST Concesionario de Vehículos · qué puede hacer cada actor
+theme: profesional
+page: CU Clientes y Vehículos
+system: API Concesionario
+layout: {cols: 3}
+
+actors:
+  - {id: asesor, name: Asesor comercial, side: left}
+  - {id: admin,  name: Administrador, side: right}
+  - {id: api,    name: API tasa de cambio (open.er-api.com), side: right, kind: system}
+
+usecases:
+  - {id: cu01, name: "CU-01 Registrar cliente",       pos: [0, 0]}
+  - {id: cu03, name: "CU-03 Actualizar cliente",      pos: [0, 1], dx: 30}
+  - {id: cu02, name: "CU-02 Consultar clientes",      pos: [0, 2]}
+  - {id: cu09, name: "CU-09 Consultar vehículos disponibles", pos: [0, 4]}
+  - {id: cu10, name: "CU-10 Buscar vehículos por marca", pos: [0, 5], dx: 20}
+  - {id: cu06, name: "CU-06 Consultar vehículos",     pos: [0, 6]}
+  - {id: cu11, name: "CU-11 Validar email y documento únicos", pos: [1, 0]}
+  - {id: cu12, name: "CU-12 Validar placa única",     pos: [1, 2]}
+  - {id: cu13, name: "CU-13 Convertir precio COP a USD", pos: [1, 5]}
+  - {id: cu04, name: "CU-04 Eliminar cliente",        pos: [2, 0]}
+  - {id: cu05, name: "CU-05 Registrar vehículo",      pos: [2, 1], dx: -70}
+  - {id: cu07, name: "CU-07 Actualizar vehículo",     pos: [2, 2]}
+  - {id: cu08, name: "CU-08 Eliminar vehículo",       pos: [2, 3], dx: -70}
+  - {id: cu14, name: "CU-14 Gestionar marcas",        pos: [2, 4]}
+
+relations:
+  - {from: asesor, to: cu01}
+  - {from: asesor, to: cu02}
+  - {from: asesor, to: cu03}
+  - {from: asesor, to: cu09}
+  - {from: asesor, to: cu10}
+  - {from: asesor, to: cu06}
+  - {from: admin, to: cu04}
+  - {from: admin, to: cu05}
+  - {from: admin, to: cu07}
+  - {from: admin, to: cu08}
+  - {from: admin, to: cu14}
+  - {from: cu01, to: cu11, type: include}
+  - {from: cu03, to: cu11, type: include}
+  - {from: cu05, to: cu12, type: include}
+  - {from: cu07, to: cu12, type: include}
+  - {from: cu06, to: cu13, type: include}
+  - {from: cu09, to: cu13, type: include}
+  - {from: cu10, to: cu13, type: include}
+  - {from: api, to: cu13}
+

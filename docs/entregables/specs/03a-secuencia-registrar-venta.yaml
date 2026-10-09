@@ -1,0 +1,43 @@
+type: secuencia
+title: Diagrama de secuencia — Registrar venta (POST /ventas)
+subtitle: CU-15 · validación, bloqueo del vehículo, descuento del 5 % y cambio de estado a VENDIDO
+theme: profesional
+page: Secuencia - Registrar venta
+name: RegistrarVenta
+
+participants:
+  - {id: asesor, name: Asesor comercial, kind: actor}
+  - {id: ctrl,   name: ":VentaController", kind: boundary}
+  - {id: svc,    name: ":VentaService", kind: control}
+  - {id: cli,    name: ":ClienteRepository", kind: entity}
+  - {id: veh,    name: ":VehiculoRepository", kind: entity}
+  - {id: ven,    name: ":VentaRepository", kind: entity}
+  - {id: err,    name: ":GlobalExceptionHandler"}
+
+steps:
+  - {from: asesor, to: ctrl, msg: "POST /ventas {clienteId, vehiculoId}"}
+  - {from: ctrl, to: ctrl, msg: "@Valid VentaRequest"}
+  - {from: ctrl, to: svc, msg: "registrar(request)"}
+  - {from: svc, to: cli, msg: "findById(clienteId)"}
+  - {from: cli, to: svc, msg: "Optional<Cliente>", type: return}
+  - {from: svc, to: veh, msg: "findByIdForUpdate(vehiculoId)"}
+  - {from: veh, to: svc, msg: "Optional<Vehiculo> (bloqueo PESSIMISTIC_WRITE)", type: return}
+  - fragment: alt
+    operands:
+      - guard: cliente o vehículo inexistente
+        steps:
+          - {from: svc, to: err, msg: "throw RecursoNoEncontradoException", type: async}
+          - {from: err, to: asesor, msg: "404 ErrorResponse", type: return}
+      - guard: "estado != DISPONIBLE"
+        steps:
+          - {from: svc, to: err, msg: "throw VehiculoNoDisponibleException", type: async}
+          - {from: err, to: asesor, msg: "409 ErrorResponse", type: return}
+      - guard: vehículo DISPONIBLE
+        steps:
+          - {from: svc, to: svc, msg: "calcularDescuento(precio): 5 % si precio > 100.000.000"}
+          - {from: svc, to: svc, msg: "venta.total = precioBase - descuento"}
+          - {from: svc, to: svc, msg: "vehiculo.setEstado(VENDIDO)"}
+          - {from: svc, to: ven, msg: "save(venta)"}
+          - {from: ven, to: svc, msg: "Venta", type: return}
+          - {from: svc, to: ctrl, msg: "VentaResponse.from(venta)", type: return}
+          - {from: ctrl, to: asesor, msg: "201 Created (JSON)", type: return}
